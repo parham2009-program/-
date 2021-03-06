@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>to fo list</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0t-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="style.css" type="text/css" media="all" />
+        <script>
+    let addBtn = document.querySelector(".add");
+    let taskField = document.querySelector(".taskInput");
+    let list = document.querySelector(".list");
+    addBtn.addEventListener("click", addtask);
+    function addtask(){
+        if (taskField.value.length === 0) {
+            return;
+        }
+        else{
+            let taskContainer = list.appendChild(document.createElement("div"))
+            let task = taskContainer.appendChild(document.createElement("p"))
+            let doneBtn = taskContainer.appendChild(document.createElement("button"))
+            let deleteBtn = taskContainer.appendChild(document.createElement("button"))
+            deleteBtn.className = "dbtn"
+            doneBtn.className = "dobtn"
+            taskContainer.className = "taskContainer"
+            task.className = "task"
+            task.innerHTML = taskField.value
+            taskField.value = ""
+            deleteBtn.addEventListener("click", deleteTask)
+            doneBtn.addEventListener("click", checkTask)
+            function checkTask(e){
+                e.target.previousSibling.style.textDecoration = "line-through"
+            }
+            function deleteTask(e){
+                e.target.parentElement.remove()
+            }
+        }
+        
+    }
+    function enter(e){
+        if(e.keyCode == 13) addtask()
+    }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="title">
+                <h2>Things to do</h2>
+            </div>
+            <div class="addSection">
+                <input type="text"  placeholder="Enter..." onkeypress="enter(event)"/>
+                <button class="add">add</button>
+            </div>
+            <div class="list">
+            </div>
+        </div>
+    </body>
+</html> 
